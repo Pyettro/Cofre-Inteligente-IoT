@@ -107,17 +107,27 @@ Mais valores estão em `resultados/medicoes.csv`.
 
 ---
 
-## 📄 Licença
+## ▶ Guia rápido (resumo do relatório)
 
-Projeto disponível sob licença MIT – consulte `LICENSE`.
+1. Faça upload do firmware no ESP32 (Arduino IDE).  
+2. Importe o fluxo Node-RED usando `/node-red/flow.json`.  
+3. Configure seu broker MQTT (HiveMQ ou Mosquitto local).  
+4. Conecte o RC522 ao ESP32 conforme diagrama `/hardware/fritzing_diagrama.png`.  
+5. Abra o dashboard no Node-RED (`http://localhost:1880/ui`).  
+6. Teste aproximando as tags ao leitor.
 
 ---
 
-## ✍️ Autores
+## 📝 Autores
 
-- Pyettro Ziroldo  
-- Talita Ozaki Bearzotti  
-- Everton Celso dos Santos Filho  
+**Pyettro Ziroldo**  
+**Talita Ozaki Bearzotti**  
+**Everton Celso dos Santos Filho**  
 
-Curso de Tecnologia em IoT e Sistemas Embarcados.
+Alunos do curso de Tecnologia – IoT e Sistemas Embarcados.
 
+---
+
+## 📄 Licença
+
+Projeto disponível sob licença MIT – consulte `LICENSE`.
