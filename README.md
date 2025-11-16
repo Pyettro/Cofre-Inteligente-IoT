@@ -105,8 +105,11 @@ As fotos/prints estão disponíveis na pasta:
 ## 📝 Autor
 
 **Pyettro Ziroldo**
+
 **Talita Ozaki Bearzotti**
+
 **Everton Celso dos Santos Filho**
+
 Aluno do curso de Tecnologia – IoT e Sistemas Embarcados
 
 ---
