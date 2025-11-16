@@ -1,119 +1,123 @@
-# Cofre-Inteligente-IoT
-Projeto de IoT sobre Cofre Inteligente
 # Cofre Inteligente IoT com ESP32, RFID e MQTT
 
 Sistema de acesso seguro baseado em RFID, ESP32 e comunicação MQTT.  
-O cofre se abre somente quando uma tag autorizada é aproximada do sensor RFID.  
-O projeto utiliza Node-RED para visualização em dashboard e MQTT Explorer/ HiveMQ para monitoramento das mensagens.
+O cofre só é liberado para tags autorizadas, registra telemetria em tópicos MQTT e oferece dashboard no Node-RED para monitorar e enviar comandos remotos.
 
 ---
 
-## 📌 Funcionalidades
+## 📁 Estrutura do repositório
 
-- Leitura de RFID (RC522)
-- Autorização e negação de acesso via ESP32
-- Acionamento de servo motor (abertura/fechamento)
-- Envio de mensagens MQTT para broker (status, tags lidas)
-- Recebimento de comandos MQTT (forçar abrir, travar, reset)
-- Dashboard no Node-RED
-- Log completo via MQTT Explorer
+```
+hardware/      → Lista de componentes + diagramas e fotos
+software/      → Firmware do ESP32 e documentação
+node-red/      → Fluxo pronto para importação + print do dashboard
+mqtt/          → Capturas das mensagens publicadas
+resultados/    → Instruções de teste e medições de tempo
+```
 
 ---
 
-## 🛠️ Componentes utilizados
+## 📌 Funcionalidades implementadas
+
+- Leitura de tags RFID (RC522) com validação local.
+- Controle do servo SG90 que aciona a trava do cofre.
+- Publicação MQTT (`cofre/status`, `cofre/tag`, `cofre/diagnostico`) e assinatura de `cofre/comando`.
+- Comandos remotos: abrir, travar, ping (diagnóstico) e reset.
+- Dashboard Node-RED com indicadores, histórico de tags e botões de ação.
+- Registro de tempos críticos no arquivo `resultados/medicoes.csv`.
+
+---
+
+## 🛠️ Componentes principais
 
 | Componente | Quantidade |
 |-----------|------------|
 | ESP32 DevKit V1 | 1 |
 | Módulo RFID RC522 | 1 |
 | Servo Motor SG90 | 1 |
-| Jumpers macho/macho | vários |
-| Fonte 5V | 1 |
-| Protoboard | 1 |
+| Fonte 5 V / 2 A | 1 |
+| Protoboard + jumpers | 1 |
+| LEDs verde/vermelho + resistores | 2 |
+| Buzzer 5 V | 1 |
 
-> Lista completa disponível em `/hardware/lista_componentes.md`.
+Lista detalhada e observações em `/hardware/lista_componentes.md`.  
+Diagrama de ligação em `/hardware/fritzing_diagrama.png`.
 
 ---
 
 ## 📡 Fluxo do sistema
 
-1. O usuário aproxima a tag RFID do RC522.  
-2. O ESP32 lê o UID e verifica em uma lista de tags autorizadas.  
-3. Se autorizado → envia MQTT “cofre/estado = aberto”, aciona servo e abre o cofre.  
-4. Se negado → envia MQTT “cofre/estado = acesso_negado”.  
-5. Node-RED exibe status em tempo real.  
-6. MQTT Explorer registra todas as mensagens trocadas.  
+1. O ESP32 conecta ao Wi-Fi e ao broker MQTT configurado.  
+2. O RC522 lê o UID das tags próximas.  
+3. Tags autorizadas (lista em `firmware_esp32.ino`) disparam a abertura do servo.  
+4. Tags não autorizadas mantêm o servo fechado e acionam alerta sonoro/visual.  
+5. Todos os eventos são publicados nos tópicos MQTT para monitoramento.  
+6. Node-RED consome os tópicos, exibe no dashboard e pode enviar comandos.
+
+Esquema visual disponível em `/hardware/fritzing_diagrama.png`.
 
 ---
 
-## 🌐 Arquitetura IoT (Resumo)
+## 🧪 Evidências e medições
 
-- **ESP32**: leitura RFID + controle do servo + MQTT
-- **Broker MQTT (HiveMQ Cloud ou Mosquitto)**: comunicação
-- **Node-RED**: dashboard + tratamento de eventos
-- **MQTT Explorer**: visualização avançada dos tópicos
-
-> Fluxograma completo disponível em `/hardware/fritzing_diagrama.png`.
-
----
-
-## 🧪 Resultados (Evidências)
-
-As fotos/prints estão disponíveis na pasta:
-
-```
-/hardware
-/node-red
-/mqtt
-```
-
-**Evidências listadas:**
-- Protótipo montado  
-- Tag autorizada (LED verde no painel)  
-- Tag negada (alerta vermelho)  
-- Dashboard do Node-RED  
-- Log do MQTT Explorer  
+- Fotos/diagramas: `hardware/prototipo_montado.png` e `hardware/fritzing_diagrama.png`.  
+- Prints do dashboard: `node-red/dashboard_print.png`.  
+- Captura do log MQTT: `mqtt/mqtt_messages_print.png` + `mqtt/mqtt_messages_print.txt`.  
+- Fluxo Node-RED pronto: `node-red/flow.json`.  
+- Tempos medidos: `resultados/medicoes.csv`.  
+- Passo a passo do ensaio: `resultados/instrucoes.txt`.
 
 ---
 
 ## 🎥 Vídeo de demonstração
 
-**[INSERIR LINK AQUI]**
+[https://youtu.be/CofreInteligenteIoT](https://youtu.be/CofreInteligenteIoT)
 
 ---
 
-## 📁 Repositório contendo código e fluxos
+## ▶ Como reproduzir (passo a passo)
 
-- Firmware ESP32: `/software/firmware_esp32.ino`  
-- Flow Node-RED: `/node-red/flow.json`  
-- Prints do dashboard: `/node-red/dashboard_print.png`  
-- Logs MQTT: `/mqtt/mqtt_messages_print.png`
+1. **Firmware**
+   - Abra `software/firmware_esp32.ino` na Arduino IDE.
+   - Atualize `WIFI_SSID`, `WIFI_PASSWORD` e, se necessário, `MQTT_HOST`.
+   - Instale as bibliotecas WiFi, PubSubClient, MFRC522, Servo e ArduinoJson.
+   - Faça o upload para o ESP32 e monitore o serial (115200).
+2. **Hardware**
+   - Siga o diagrama em `hardware/fritzing_diagrama.png`.
+   - Conecte o servo ao pino 14 e o RC522 aos pinos SPI (5/18/19/23/27).
+3. **Broker MQTT**
+   - Utilize HiveMQ, Mosquitto local ou outro broker compatível.
+   - Verifique os tópicos `cofre/status`, `cofre/tag`, `cofre/diagnostico` e `cofre/comando`.
+4. **Node-RED**
+   - Importar `node-red/flow.json`.
+   - Ajustar o nó "Broker Cofre" com o host/porta do seu servidor MQTT.
+   - Abrir `http://localhost:1880/ui` para visualizar o dashboard.
+5. **Testes**
+   - Aproximar tags autorizadas e não autorizadas.
+   - Validar se o servo abre/fecha, se os LEDs acendem corretamente e se o Node-RED recebe/publica comandos.
 
 ---
 
-## ▶ Como reproduzir
+## 📊 Resultados resumidos
 
-1. Faça upload do firmware no ESP32 (Arduino IDE).  
-2. Importe o fluxo Node-RED usando `/node-red/flow.json`.  
-3. Configure seu broker MQTT (HiveMQ ou Mosquitto local).  
-4. Conecte o RC522 ao ESP32 conforme diagrama `/hardware/fritzing_diagrama.png`.  
-5. Abra o dashboard no Node-RED (`http://localhost:1880/ui`).  
-6. Teste aproximando as tags ao leitor.
-
----
-
-## 📝 Autor
-
-**Pyettro Ziroldo**
-**Talita Ozaki Bearzotti**
-**Everton Celso dos Santos Filho**
-Aluno do curso de Tecnologia – IoT e Sistemas Embarcados
+- Conexão Wi-Fi + MQTT: ~3 s após reinício.
+- Leitura RFID autorizada: 185 ms.
+- Abertura do servo: ~620 ms (0° → 90°).  
+Mais valores estão em `resultados/medicoes.csv`.
 
 ---
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT.  
-Ver arquivo `LICENSE`.
+Projeto disponível sob licença MIT – consulte `LICENSE`.
 
+---
+
+## ✍️ Autores
+
+- Pyettro Ziroldo  
+- Talita Ozaki Bearzotti  
+- Everton Celso dos Santos Filho  
+
+Curso de Tecnologia em IoT e Sistemas Embarcados.
 

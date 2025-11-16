@@ -1,0 +1,11 @@
+[2025-11-15 20:01:33] → cofre/status :: {"estado":"inicializando","wifi":"conectando"}
+[2025-11-15 20:01:37] → cofre/status :: {"estado":"aguardando_tag","wifi":"ok","mqtt":"ok"}
+[2025-11-15 20:02:02] ← cofre/comando :: {"acao":"ping"}
+[2025-11-15 20:02:02] → cofre/diagnostico :: {"uptime":32,"servo":"travado"}
+[2025-11-15 20:02:15] → cofre/tag :: {"uid":"73:2A:1B:5C","autorizado":true,"nome":"Administrador"}
+[2025-11-15 20:02:15] → cofre/status :: {"estado":"aberto","tempo_ms":620}
+[2025-11-15 20:02:22] → cofre/status :: {"estado":"fechado","tempo_ms":605}
+[2025-11-15 20:03:04] → cofre/tag :: {"uid":"1F:99:33:7A","autorizado":false}
+[2025-11-15 20:03:05] → cofre/status :: {"estado":"acesso_negado"}
+[2025-11-15 20:03:20] ← cofre/comando :: {"acao":"abrir"}
+[2025-11-15 20:03:20] → cofre/status :: {"estado":"aberto_remote","origem":"node-red"}

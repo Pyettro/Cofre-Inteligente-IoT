@@ -1,0 +1,309 @@
+[
+    {
+        "id": "e8bd8e1f7a1d9a1c",
+        "type": "tab",
+        "label": "Cofre Inteligente",
+        "disabled": false,
+        "info": "Fluxo principal para monitorar e comandar o cofre inteligente."
+    },
+    {
+        "id": "4c823c0b4a0aeb6b",
+        "type": "mqtt-broker",
+        "name": "Broker Cofre",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "cofre-node-red",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": ""
+    },
+    {
+        "id": "f35b487e6705f67a",
+        "type": "mqtt in",
+        "z": "e8bd8e1f7a1d9a1c",
+        "name": "Status Cofre",
+        "topic": "cofre/status",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "4c823c0b4a0aeb6b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "4605e94f0bdeced9",
+                "4de3978ef5b1cfdb"
+            ]
+        ]
+    },
+    {
+        "id": "4605e94f0bdeced9",
+        "type": "ui_text",
+        "z": "e8bd8e1f7a1d9a1c",
+        "group": "23c1dd624cb8c1a5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Indicador de estado",
+        "label": "Estado atual",
+        "format": "{{msg.payload.estado}}",
+        "layout": "row-spread",
+        "x": 460,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "4de3978ef5b1cfdb",
+        "type": "ui_gauge",
+        "z": "e8bd8e1f7a1d9a1c",
+        "name": "Latência ação",
+        "group": "23c1dd624cb8c1a5",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Tempo de ação (ms)",
+        "label": "ms",
+        "format": "{{msg.payload.tempo_ms || 0}}",
+        "min": 0,
+        "max": "1500",
+        "colors": [
+            "#1e88e5",
+            "#ffc107",
+            "#d32f2f"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 470,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "51fecc60d16c3d3e",
+        "type": "mqtt in",
+        "z": "e8bd8e1f7a1d9a1c",
+        "name": "Eventos RFID",
+        "topic": "cofre/tag",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "4c823c0b4a0aeb6b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "9ee7193d59a37b44",
+                "d0decc4a7dd48894"
+            ]
+        ]
+    },
+    {
+        "id": "9ee7193d59a37b44",
+        "type": "ui_table",
+        "z": "e8bd8e1f7a1d9a1c",
+        "group": "0f77fab0f4f3f2f6",
+        "name": "Histórico de tags",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "columns": [
+            {
+                "field": "uid",
+                "title": "UID",
+                "width": "120",
+                "align": "left",
+                "formatter": "plaintext"
+            },
+            {
+                "field": "autorizado",
+                "title": "Autorizado",
+                "width": "90",
+                "align": "center",
+                "formatter": "tickCross"
+            },
+            {
+                "field": "nome",
+                "title": "Usuário",
+                "width": "120",
+                "align": "left",
+                "formatter": "plaintext"
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 470,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d0decc4a7dd48894",
+        "type": "ui_toast",
+        "z": "e8bd8e1f7a1d9a1c",
+        "position": "top right",
+        "displayTime": "5",
+        "highlight": "autorizado",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "Alerta tag",
+        "x": 470,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "09947ee8d92565f4",
+        "type": "mqtt in",
+        "z": "e8bd8e1f7a1d9a1c",
+        "name": "Diagnóstico",
+        "topic": "cofre/diagnostico",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "4c823c0b4a0aeb6b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "a655f94e2dfe2199"
+            ]
+        ]
+    },
+    {
+        "id": "a655f94e2dfe2199",
+        "type": "ui_text",
+        "z": "e8bd8e1f7a1d9a1c",
+        "group": "0f77fab0f4f3f2f6",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Diagnóstico",
+        "label": "Diagnóstico",
+        "format": "{{msg.payload | json}}",
+        "layout": "row-spread",
+        "x": 470,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d4f54b2feb4fde9f",
+        "type": "ui_button",
+        "z": "e8bd8e1f7a1d9a1c",
+        "name": "Abrir Remoto",
+        "group": "23c1dd624cb8c1a5",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Abrir Cofre",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#1e88e5",
+        "icon": "",
+        "payload": "{\"acao\":\"abrir\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 170,
+        "y": 380,
+        "wires": [
+            [
+                "72db0c7fb364e747"
+            ]
+        ]
+    },
+    {
+        "id": "dd97a42b2ebfb53c",
+        "type": "ui_button",
+        "z": "e8bd8e1f7a1d9a1c",
+        "name": "Travar Remoto",
+        "group": "23c1dd624cb8c1a5",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Travar Cofre",
+        "color": "",
+        "bgcolor": "#d32f2f",
+        "icon": "",
+        "payload": "{\"acao\":\"travar\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 170,
+        "y": 420,
+        "wires": [
+            [
+                "72db0c7fb364e747"
+            ]
+        ]
+    },
+    {
+        "id": "72db0c7fb364e747",
+        "type": "mqtt out",
+        "z": "e8bd8e1f7a1d9a1c",
+        "name": "Publicar comando",
+        "topic": "cofre/comando",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4c823c0b4a0aeb6b",
+        "x": 510,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "407c7362a6a884e9",
+        "type": "ui_tab",
+        "name": "Dashboard Cofre",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "23c1dd624cb8c1a5",
+        "type": "ui_group",
+        "name": "Status e Controle",
+        "tab": "407c7362a6a884e9",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "0f77fab0f4f3f2f6",
+        "type": "ui_group",
+        "name": "Eventos",
+        "tab": "407c7362a6a884e9",
+        "order": 2,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    }
+]

@@ -1,0 +1,9 @@
+evento,duracao_ms,observacao
+wifi_conexao,3120,Tempo entre reset e MQTT conectado
+leitura_rfid,185,UID 73 2A 1B 5C autorizado
+leitura_rfid_negada,210,UID 1F 99 33 7A não cadastrado
+acionamento_servo_abrir,620,Ângulo 0º→90º
+acionamento_servo_fechar,605,Ângulo 90º→0º
+publicacao_mqtt_status,58,Envio topic cofre/status
+atualizacao_dashboard,430,Latência média Node-RED
+executar_comando_remoto,980,Comando cofre/comando=abrir

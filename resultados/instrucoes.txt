@@ -1,0 +1,38 @@
+RELATÓRIO DE TESTES - COFRE INTELIGENTE IoT
+------------------------------------------
+
+1. Firmware
+   - Versão: 1.0.0 (arquivo software/firmware_esp32.ino)
+   - Compilador: Arduino IDE 2.3.2 com ESP32 Core 3.0.6
+   - Bibliotecas: WiFi.h, PubSubClient, SPI, MFRC522, Servo.h, ArduinoJson
+
+2. Rede
+   - SSID de testes: LAB_IOT
+   - Broker MQTT: broker.hivemq.com porta 1883
+   - Tópicos utilizados:
+       * cofre/status
+       * cofre/tag
+       * cofre/diagnostico
+       * cofre/comando
+
+3. Node-RED
+   - Importar `node-red/flow.json`
+   - Ajustar credenciais MQTT no nó "Broker Cofre"
+   - Dashboard disponível em http://localhost:1880/ui (grupo "Cofre Inteligente")
+
+4. Medições
+   - Tempos coletados registrados em `resultados/medicoes.csv`
+   - Valores correspondem a média de 5 leituras para cada evento
+
+5. Evidências
+   - Diagramas: `hardware/fritzing_diagrama.png`
+   - Protótipo: `hardware/prototipo_montado.png`
+   - Dashboard: `node-red/dashboard_print.png`
+   - Logs MQTT: `mqtt/mqtt_messages_print.png` e `mqtt/mqtt_messages_print.txt`
+
+6. Procedimento de reprodução resumido
+   - Configurar `config.h` (Wi-Fi, broker e tags)
+   - Fazer upload do firmware
+   - Conectar ESP32, RC522 e servo conforme diagrama
+   - Ligar broker/Node-RED e importar o fluxo
+   - Aproximar tags autorizadas e observar comportamento descrito no README

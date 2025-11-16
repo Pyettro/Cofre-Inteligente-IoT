@@ -1,0 +1,32 @@
+# Arquivos temporários e diretórios de build
+.DS_Store
+Thumbs.db
+
+# Saídas de compilação Arduino/PlatformIO
+*.bin
+*.elf
+*.hex
+*.ino.tmp
+.pio
+build/
+.arduinoide/
+
+# Dependências Node-RED/Node.js
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Logs temporários
+*.log
+logs/
+
+# Configurações locais
+.env
+.env.*
+
+# Backups de editor
+*.swp
+*.swo
+*.bak
+*.tmp
