@@ -1,6 +1,12 @@
 Evidências de Funcionamento 
 
+Modelo de Montagem (Fritzing)
+<img width="945" height="347" alt="image" src="https://github.com/user-attachments/assets/e1dbdb8d-0f43-40de-8e22-832d27a5e342" />
+
+
 •	Foto do protótipo montado:
+
+
  <img width="605" height="614" alt="Imagem1" src="https://github.com/user-attachments/assets/2e2097c6-0f18-4c26-bc85-6428b88188c3" />
 
 
