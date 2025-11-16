@@ -66,6 +66,7 @@ Esquema visual disponível em `/hardware/fritzing_diagrama.png`.
 - Fluxo Node-RED pronto: `node-red/flow.json`.  
 - Tempos medidos: `resultados/medicoes.csv`.  
 - Passo a passo do ensaio: `resultados/instrucoes.txt`.
+- Descrição textual com evidências adicionais: `hardware/Funcionamento.md`.
 
 ---
 
