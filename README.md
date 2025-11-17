@@ -70,6 +70,18 @@ Esquema visual disponível em `/hardware/fritzing_diagrama.png`.
 
 ---
 
+## 🖥️ Simulação no Wokwi
+
+- Projeto atual: [https://wokwi.com/projects/447907056776482817](https://wokwi.com/projects/447907056776482817)
+- Arquivos prontos para importação: pasta `/wokwi` (contém `diagram.json`, `sketch.ino` e instruções).
+- Para importar manualmente:
+  1. Crie um novo projeto ESP32 no Wokwi.
+  2. Cole o conteúdo de `wokwi/diagram.json` em **File → Save a copy → Import Diagram**.
+  3. Substitua o código pelo `wokwi/sketch.ino`.
+  4. Ajuste credenciais MQTT/Wi-Fi, inicie a simulação e utilize o RC522/servo/LEDs virtuais.
+
+---
+
 ## 🎥 Vídeo de demonstração
 
 [https://youtu.be/CofreInteligenteIoT](https://youtu.be/CofreInteligenteIoT)

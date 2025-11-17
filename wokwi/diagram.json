@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -33.7, "left": 43, "attrs": {} },
+    { "type": "wokwi-rc522", "id": "rfid", "top": -15, "left": -160, "attrs": {} },
+    { "type": "wokwi-servo", "id": "servo", "top": 140, "left": 180, "attrs": {} },
+    { "type": "wokwi-led", "id": "ledR", "top": 140, "left": -40, "attrs": { "color": "red" } },
+    { "type": "wokwi-led", "id": "ledV", "top": 140, "left": 10, "attrs": { "color": "green" } },
+    { "type": "wokwi-buzzer", "id": "buzz", "top": -110, "left": 100, "attrs": {} }
+  ],
+  "connections": [
+    [ "rfid:SCK", "esp:18", "black", [] ],
+    [ "rfid:MOSI", "esp:23", "black", [] ],
+    [ "rfid:MISO", "esp:19", "black", [] ],
+    [ "rfid:SDA", "esp:5", "black", [] ],
+    [ "rfid:RESET", "esp:27", "black", [] ],
+    [ "rfid:3.3V", "esp:3.3V", "red", [] ],
+    [ "rfid:GND", "esp:GND.2", "black", [] ],
+    [ "servo:V+", "esp:5V", "red", [] ],
+    [ "servo:GND", "esp:GND.1", "black", [] ],
+    [ "servo:PWM", "esp:14", "yellow", [] ],
+    [ "ledR:A", "esp:25", "red", [] ],
+    [ "ledR:C", "esp:GND.3", "black", [] ],
+    [ "ledV:A", "esp:26", "green", [] ],
+    [ "ledV:C", "esp:GND.4", "black", [] ],
+    [ "buzz:1", "esp:33", "purple", [] ],
+    [ "buzz:2", "esp:GND.5", "black", [] ]
+  ],
+  "dependencies": {}
+}
