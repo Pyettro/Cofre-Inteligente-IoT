@@ -84,7 +84,7 @@ Esquema visual disponível em `/hardware/fritzing_diagrama.png`.
 
 ## 🎥 Vídeo de demonstração
 
-[https://youtu.be/CofreInteligenteIoT](https://youtu.be/CofreInteligenteIoT)
+[Link video](https://youtu.be/b8zRZoJECz4)
 
 ---
 
