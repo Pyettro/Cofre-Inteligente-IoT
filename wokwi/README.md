@@ -1,6 +1,7 @@
 # Simulação no Wokwi
 
-Esta pasta contém todos os arquivos necessários para reproduzir o Cofre Inteligente no [Wokwi](https://wokwi.com).
+Esta pasta contém todos os arquivos necessários para reproduzir o Cofre Inteligente no [Wokwi](https://wokwi.com).  
+Projeto final pronto para execução: [https://wokwi.com/projects/447978924553592833](https://wokwi.com/projects/447978924553592833)
 
 ## Estrutura
 

@@ -72,7 +72,7 @@ Esquema visual disponível em `/hardware/fritzing_diagrama.png`.
 
 ## 🖥️ Simulação no Wokwi
 
-- Projeto atual: [https://wokwi.com/projects/447907056776482817](https://wokwi.com/projects/447907056776482817)
+- Projeto final: [https://wokwi.com/projects/447978924553592833](https://wokwi.com/projects/447978924553592833)
 - Arquivos prontos para importação: pasta `/wokwi` (contém `diagram.json`, `sketch.ino` e instruções).
 - Para importar manualmente:
   1. Crie um novo projeto ESP32 no Wokwi.
